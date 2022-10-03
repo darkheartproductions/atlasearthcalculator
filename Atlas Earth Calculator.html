@@ -1,0 +1,452 @@
+<html>
+	<head>
+		<title>Atlas Earth Calculator - Peroxide</title>
+		<meta></meta>
+		<style>
+			body {
+				margin: 0px;
+				overflow-x: hidden;
+			}
+			.tweaking .content {
+				width: 80%;
+				height: 80%;
+				background-color: darkgrey;
+				padding: 5%;
+			}
+			
+			.data {
+				width: 80%;
+				height: 80%;
+				background-color: grey;
+				padding: 5%;
+			}
+			.all {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				grid-template-rows: 1fr;
+				width: 100%;
+				height: 80%;
+				margin: 2.5%;
+				margin-top: 6%;
+			}
+			header {
+				width: 100%;
+				height: 6%;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+			}
+			.sel {
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				grid-template-rows: 1fr;
+				width: 200px;
+			}
+			.sel .n {
+				width: 20px;
+				cursor: pointer;
+				transition: background-color 1s;
+				transition: background-color 2s, border-radius 1s;
+			}
+			.sel .n:hover {
+				background-color: yellow;
+				border-radius: 50%;
+				transition: background-color 2s, border-radius 0s;
+			}
+			.sel div {
+				justify-self: center;
+				text-align: center;
+			}
+			.sel .info {
+				width: 100px;
+			}
+			.parcels {
+				display: grid;
+				grid-template-rows: 1fr 1fr;
+				grid-template-columns: 1fr 1fr;
+				grid-gap: 50px 0px;
+				justify-items: center;
+				align-items: center;
+			}
+			.min::after {
+				content: '-';
+			}
+			.plus::after {
+				content: '+';
+			}
+			#commonParcelPayout h3::after {
+				content: 'Common Parcel Payout (Click to Expand)';
+			}
+			#commonParcelPayout h3 {
+				cursor: pointer;
+			}
+		</style>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127752129-1"></script>
+	</head>
+	<body>
+		<header>head</header>
+		<div class="all">
+			<div class="tweaking">
+				<div class="content">
+					<div class="parcels">
+						<div class="sel">
+							<div class="n min"></div>
+							<div class="info">Common: 5</div>
+							<div class="n plus"></div>
+						</div>
+						<div class="sel">
+							<div class="n min"></div>
+							<div class="info">Rare: 5</div>
+							<div class="n plus"></div>
+						</div>
+						<div class="sel">
+							<div class="n min"></div>
+							<div class="info">Epic: 5</div>
+							<div class="n plus"></div>
+						</div>
+						<div class="sel">
+							<div class="n min"></div>
+							<div class="info">Legendary: 5</div>
+							<div class="n plus"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="data">
+				<div class="summary">
+					<div>Account Value: <span id="accountValue"></span></div>
+					<div>Rent Per Day: $<span id="epd"></span></div>
+					<div>Rent Per Day (Boosted): $<span id="epdW"></span></div>
+					<div>Rent Per Month: $<span id="epm"></span></div>
+					<div>Rent Per Month (Boosted): $<span id="epmW"></span></div>
+					<div>Rent Per Year: $<span id="epy"></span></div>
+					<div>Rent Per Year (Boosted): $<span id="epyW"></span></div>
+				</div>
+				<h1>In-Depth Data</h1>
+				<div class="dataContainer">
+					<div id="commonParcelPayout"><h3></h3>
+						<div id="cppContainer" style="display: none;">
+							<div>Common Parcel Rent Per Second: $<span id="cprps">0.00000000</span></div>
+							<div>Common Parcel Boost Rent Per Second: $<span id="cpbrps">0.00000000</span></div>
+							<div>Common Parcel Badge Rent Per Second: $<span id="cpBrps">0.00000000</span></div>
+							<div>Common Parcel Total Rent Per Second: $<span id="cptrps">0.00000000</span></div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		<footer></footer>
+	</div>
+	</body>
+	<script>
+	let app = {
+		tracking: false,
+		userDat: {
+			parcels: {
+				common: 67,
+				rare: 36,
+				epic: 19,
+				legendary: 7,
+			},
+			atlasBucks: 0,
+			badges: 1,
+			boostsPerDay: 1,
+			settings: {
+				parcelValue: {
+					common: 5,
+					rare: 7.50,
+					epic: 10,
+					legendary: 20,
+				},
+			},
+		},
+		gameConfig: {
+			parcels: {
+				common: {
+					chance: 50,
+					payout: 0.0000000011,
+				},
+				rare: {
+					chance: 30,
+					payout: 0.0000000016,
+				},
+				epic: {
+					chance: 15,
+					payout: 0.0000000022,
+				},
+				legendary: {
+					chance: 5,
+					payout: 0.0000000044,
+				},
+			},
+		},
+		funcs: {
+			save: () => {
+				localStorage.setItem('aeData', JSON.stringify(app.userDat));
+			},
+			init: () => {
+				if (app.tracking) {
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+
+					gtag('config', 'UA-127752129-1');
+				}
+				if (localStorage.getItem("aeData")) {
+					if (localStorage.getItem("aeData") == '[object Object]' || localStorage.getItem("aeData") == null) {
+						localStorage.clear("aeData");
+						location = location;
+					}
+					app.userDat = JSON.parse(localStorage.getItem("aeData"));
+					app.funcs.calculate();
+				} else {
+					// New
+					alert('No Data Found');
+					localStorage.setItem("aeData", JSON.stringify(app.userDat));
+				}
+				document.getElementsByClassName('n')[0].onclick = () => {
+					app.userDat.parcels.common -= 1;
+					app.funcs.calculate();
+				}
+				document.getElementsByClassName('n')[1].onclick = () => {
+					app.userDat.parcels.common += 1;
+					app.funcs.calculate();
+				}
+				document.getElementsByClassName('n')[2].onclick = () => {
+					app.userDat.parcels.rare -= 1;
+					app.funcs.calculate();
+				}
+				document.getElementsByClassName('n')[3].onclick = () => {
+					app.userDat.parcels.rare += 1;
+					app.funcs.calculate();
+				}
+				document.getElementsByClassName('n')[4].onclick = () => {
+					app.userDat.parcels.epic -= 1;
+					app.funcs.calculate();
+				}
+				document.getElementsByClassName('n')[5].onclick = () => {
+					app.userDat.parcels.epic += 1;
+					app.funcs.calculate();
+				}
+				document.getElementsByClassName('n')[6].onclick = () => {
+					app.userDat.parcels.legendary -= 1;
+					app.funcs.calculate();
+				}
+				document.getElementsByClassName('n')[7].onclick = () => {
+					app.userDat.parcels.legendary += 1;
+					app.funcs.calculate();
+				}
+				let cppo = false;
+				document.getElementById('commonParcelPayout').onclick = () => {
+					if (cppo) {
+						cppo = false;
+						document.getElementById('cppContainer').style = "display: none;";
+					} else {
+						cppo = true;
+						document.getElementById('cppContainer').style = "display: initial;";
+					}
+				};
+				document.getElementsByClassName('info')[0].onclick = () => {
+					let a = document.getElementsByClassName('info')[0].onclick;
+					document.getElementsByClassName('info')[0].onclick = () => {
+						let c = prompt();
+						app.userDat.parcels.common = Number(c);
+						app.funcs.calculate();
+					}
+					let b = setTimeout(function() {document.getElementsByClassName('info')[0].onclick = a}, 1000);
+				}
+				document.getElementsByClassName('info')[1].onclick = () => {
+					let a = document.getElementsByClassName('info')[1].onclick;
+					document.getElementsByClassName('info')[1].onclick = () => {
+						let c = prompt();
+						app.userDat.parcels.rare = Number(c);
+						app.funcs.calculate();
+					}
+					let b = setTimeout(function() {document.getElementsByClassName('info')[1].onclick = a}, 1000);
+				}
+				document.getElementsByClassName('info')[2].onclick = () => {
+					let a = document.getElementsByClassName('info')[2].onclick;
+					document.getElementsByClassName('info')[2].onclick = () => {
+						let c = prompt();
+						app.userDat.parcels.epic = Number(c);
+						app.funcs.calculate();
+					}
+					let b = setTimeout(function() {document.getElementsByClassName('info')[2].onclick = a}, 1000);
+				}
+				document.getElementsByClassName('info')[3].onclick = () => {
+					let a = document.getElementsByClassName('info')[3].onclick;
+					document.getElementsByClassName('info')[3].onclick = () => {
+						let c = prompt();
+						app.userDat.parcels.legendary = Number(c);
+						app.funcs.calculate();
+					}
+					let b = setTimeout(function() {document.getElementsByClassName('info')[3].onclick = a}, 1000);
+				}
+				
+				app.funcs.calculate();
+			},
+			updateDisplay: (o) => {
+				document.getElementsByClassName('info')[0].innerHTML = `Common: ${app.userDat.parcels.common}`;
+				document.getElementsByClassName('info')[1].innerHTML = `Rare: ${app.userDat.parcels.rare}`;
+				document.getElementsByClassName('info')[2].innerHTML = `Epic: ${app.userDat.parcels.epic}`;
+				document.getElementsByClassName('info')[3].innerHTML = `Legendary: ${app.userDat.parcels.legendary}`;
+				
+				document.getElementById('accountValue').innerHTML = `$${app.userDat.parcels.common * app.userDat.settings.parcelValue.common + app.userDat.parcels.rare * app.userDat.settings.parcelValue.rare + app.userDat.parcels.epic * app.userDat.settings.parcelValue.epic + app.userDat.parcels.legendary * app.userDat.settings.parcelValue.legendary}`;
+				document.getElementById('epd').innerHTML = o.payPerDay.totalNoBoost;
+				document.getElementById('epdW').innerHTML = o.payPerDay.totalWBoost;
+				document.getElementById('epm').innerHTML = o.payPerMonth.totalNoBoost;
+				document.getElementById('epmW').innerHTML = o.payPerMonth.totalWBoost;
+				document.getElementById('epy').innerHTML = o.payPerYear.totalNoBoost;
+				document.getElementById('epyW').innerHTML = o.payPerYear.totalWBoost;
+				app.funcs.save();
+			},
+			calculate: () => {
+				/* Vars */
+				let output = {}
+				
+				let cp = app.userDat.parcels.common;
+				let rp = app.userDat.parcels.rare;
+				let ep = app.userDat.parcels.epic;
+				let lp = app.userDat.parcels.legendary;
+				
+				let cpay = app.gameConfig.parcels.common.payout;
+				let rpay = app.gameConfig.parcels.rare.payout;
+				let epay = app.gameConfig.parcels.epic.payout;
+				let lpay = app.gameConfig.parcels.legendary.payout;
+				
+				let ab = app.userDat.atlasBucks;
+				let badges = app.userDat.badges;
+				
+				let bpd = app.userDat.boostsPerDay;
+				
+				let totalParcels = cp + rp + ep + lp;
+				let allowedBoost = 30;
+				if (totalParcels >= 151) {
+					allowedBoost = 20;
+					if (totalParcels >= 221) {
+						allowedBoost = 15;
+						if (totalParcels >= 291) {
+							allowedBoost = 12;
+							if (totalParcels >= 366) {
+								allowedBoost = 10
+								if (totalParcels >= 436) {
+									allowedBoost = 8;
+									if (totalParcels >= 546) {
+										allowedBoost = 7;
+										if (totalParcels >= 626) {
+											allowedBoost = 6;
+											if (totalParcels >= 731) {
+												allowedBoost = 5;
+												if (totalParcels >= 876) {
+													allowedBoost = 4;
+													if (totalParcels >= 1101) {
+														allowedBoost = 3;
+														if (totalParcels >= 1501) {
+															allowedBoost = 2;
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				output.allowedBoost = allowedBoost;
+				/* This section to calc earnings per m, h, d, w, and y */
+				
+				let bb;
+				
+				if (badges >= 0) {
+						bb = 1;
+					if (badges > 0) {
+						bb = 1.05;
+						if (badges > 10) {
+							bb = 1.10;
+							if (badges > 30) {
+								bb = 1.15;
+								if (badges > 60) {
+									bb = 1.20;
+									if (badges > 100) {
+										bb = 1.25;
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				output.badgeMultiplier = bb;
+				
+				let commonEarnings = (cp * cpay * bb);
+				let rareEarnings = (rp * rpay * bb);
+				let epicEarnings = (ep * epay * bb);
+				let legendaryEarnings = (lp * lpay * bb);
+				if (bpd >= 1) {
+					bCommonEarnings = (commonEarnings * allowedBoost);
+					bRareEarnings = (rareEarnings * allowedBoost);
+					bEpicEarnings = (epicEarnings * allowedBoost);
+					bLegendaryEarnings = (legendaryEarnings * allowedBoost);
+				} else {
+					bCommonEarnings = commonEarnings;
+					bRareEarnings = rareEarnings;
+					bEpicEarnings = epicEarnings;
+					bLegendaryEarnings = legendaryEarnings;
+				}
+				output.payPerSecond = {};
+				output.payPerSecond.commonNoBoost = commonEarnings.toFixed(10);
+				output.payPerSecond.rareNoBoost = rareEarnings.toFixed(10);
+				output.payPerSecond.epicNoBoost = epicEarnings.toFixed(10);
+				output.payPerSecond.legendaryNoBoost = legendaryEarnings.toFixed(10);
+				output.payPerSecond.totalNoBoost = (commonEarnings + rareEarnings + epicEarnings + legendaryEarnings).toFixed(10);
+				
+				output.payPerSecond.commonWBoost = bCommonEarnings.toFixed(10);
+				output.payPerSecond.rareWBoost = bRareEarnings.toFixed(10);
+				output.payPerSecond.epicWBoost = bEpicEarnings.toFixed(10);
+				output.payPerSecond.legendaryWBoost = bLegendaryEarnings.toFixed(10);
+				output.payPerSecond.totalWBoost = (bCommonEarnings + bRareEarnings + bEpicEarnings + bLegendaryEarnings).toFixed(10);
+				
+				output.payPerMinute = {};
+				for (let i = 0; i < Object.keys(output.payPerSecond).length; i++) {
+					let a = output.payPerSecond[Object.keys(output.payPerSecond)[i]];
+					output.payPerMinute[Object.keys(output.payPerSecond)[i]] = (Number(a) * 60).toFixed(10);
+				}
+				
+				output.payPerHour = {};
+				for (let i = 0; i < Object.keys(output.payPerMinute).length; i++) {
+					let a = output.payPerMinute[Object.keys(output.payPerMinute)[i]];
+					output.payPerHour[Object.keys(output.payPerMinute)[i]] = (Number(a) * 60).toFixed(10);
+				}
+				
+				output.payPerDay = {};
+				for (let i = 0; i < Object.keys(output.payPerHour).length; i++) {
+					let a = output.payPerHour[Object.keys(output.payPerHour)[i]];
+					output.payPerDay[Object.keys(output.payPerHour)[i]] = (Number(a) * 24).toFixed(10);
+				}
+				
+				output.payPerWeek = {};
+				for (let i = 0; i < Object.keys(output.payPerDay).length; i++) {
+					let a = output.payPerDay[Object.keys(output.payPerDay)[i]];
+					output.payPerWeek[Object.keys(output.payPerDay)[i]] = (Number(a) * 7).toFixed(10);
+				}
+				
+				output.payPerMonth = {};
+				for (let i = 0; i < Object.keys(output.payPerWeek).length; i++) {
+					let a = output.payPerWeek[Object.keys(output.payPerWeek)[i]];
+					output.payPerMonth[Object.keys(output.payPerWeek)[i]] = (Number(a) * 30).toFixed(10);
+				}
+				
+				output.payPerYear = {};
+				for (let i = 0; i < Object.keys(output.payPerDay).length; i++) {
+					let a = output.payPerDay[Object.keys(output.payPerDay)[i]];
+					output.payPerYear[Object.keys(output.payPerDay)[i]] = (Number(a) * 364).toFixed(10);
+				}
+				app.funcs.updateDisplay(output);
+			},
+		},
+	}
+	app.funcs.init();
+	</script>
+</html>
