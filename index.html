@@ -19,6 +19,7 @@
 				height: 80%;
 				background-color: grey;
 				padding: 5%;
+				overflow-y: auto;
 			}
 			.all {
 				display: grid;
@@ -80,6 +81,24 @@
 			#commonParcelPayout h3 {
 				cursor: pointer;
 			}
+			#epicParcelPayout h3::after {
+				content: 'Epic Parcel Payout (Click to Expand)';
+			}
+			#epicParcelPayout h3 {
+				cursor: pointer;
+			}
+			#rareParcelPayout h3::after {
+				content: 'Rare Parcel Payout (Click to Expand)';
+			}
+			#rareParcelPayout h3 {
+				cursor: pointer;
+			}
+			#legendaryParcelPayout h3::after {
+				content: 'Legendary Parcel Payout (Click to Expand)';
+			}
+			#legendaryParcelPayout h3 {
+				cursor: pointer;
+			}
 		</style>
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127752129-1"></script>
 	</head>
@@ -130,6 +149,178 @@
 							<div>Common Parcel Boost Rent Per Second: $<span id="cpbrps">0.00000000</span></div>
 							<div>Common Parcel Badge Rent Per Second: $<span id="cpBrps">0.00000000</span></div>
 							<div>Common Parcel Total Rent Per Second: $<span id="cptrps">0.00000000</span></div>
+							<br/>
+							<div>Common Parcel Rent Per Minute: $<span id="cprpm">0.00000000</span></div>
+							<div>Common Parcel Boost Rent Per Minute: $<span id="cpbrpm">0.00000000</span></div>
+							<div>Common Parcel Badge Rent Per Minute: $<span id="cpBrpm">0.00000000</span></div>
+							<div>Common Parcel Total Rent Per Minute: $<span id="cptrpm">0.00000000</span></div>
+							<br/>
+							<div>Common Parcel Rent Per Hour: $<span id="cprph">0.00000000</span></div>
+							<div>Common Parcel Boost Rent Per Hour: $<span id="cpbrph">0.00000000</span></div>
+							<div>Common Parcel Badge Rent Per Hour: $<span id="cpBrph">0.00000000</span></div>
+							<div>Common Parcel Total Rent Per Hour: $<span id="cptrph">0.00000000</span></div>
+							<br/>
+							<div>Common Parcel Rent Per Day: $<span id="cprpd">0.00000000</span></div>
+							<div>Common Parcel Boost Rent Per Day: $<span id="cpbrpd">0.00000000</span></div>
+							<div>Common Parcel Badge Rent Per Day: $<span id="cpBrpd">0.00000000</span></div>
+							<div>Common Parcel Total Rent Per Day: $<span id="cptrpd">0.00000000</span></div>
+							<br/>
+							<div>Common Parcel Rent Per Week: $<span id="cprpw">0.00000000</span></div>
+							<div>Common Parcel Boost Rent Per Week: $<span id="cpbrpw">0.00000000</span></div>
+							<div>Common Parcel Badge Rent Per Week: $<span id="cpBrpw">0.00000000</span></div>
+							<div>Common Parcel Total Rent Per Week: $<span id="cptrpw">0.00000000</span></div>
+							<br/>
+							<div>Common Parcel Rent Per Month: $<span id="cprpmo">0.00000000</span></div>
+							<div>Common Parcel Boost Rent Per Month: $<span id="cpbrpmo">0.00000000</span></div>
+							<div>Common Parcel Badge Rent Per Month: $<span id="cpBrpmo">0.00000000</span></div>
+							<div>Common Parcel Total Rent Per Month: $<span id="cptrpmo">0.00000000</span></div>
+							<br/>
+							<div>Common Parcel Rent Per Year: $<span id="cprpy">0.00000000</span></div>
+							<div>Common Parcel Boost Rent Per Year: $<span id="cpbrpy">0.00000000</span></div>
+							<div>Common Parcel Badge Rent Per Year: $<span id="cpBrpy">0.00000000</span></div>
+							<div>Common Parcel Total Rent Per Year: $<span id="cptrpy">0.00000000</span></div>
+							<br/>
+							<div>Common Parcels Make Up <span>0%</span> Of Your Rent.</div>
+							<!--
+							Event Boost
+							
+							
+							-->
+						</div>
+					</div>
+					<div id="rareParcelPayout"><h3></h3>
+						<div id="rppContainer" style="display: none;">
+							<div>Rare Parcel Rent Per Second: $<span id="rprps">0.00000000</span></div>
+							<div>Rare Parcel Boost Rent Per Second: $<span id="rpbrps">0.00000000</span></div>
+							<div>Rare Parcel Badge Rent Per Second: $<span id="rpBrps">0.00000000</span></div>
+							<div>Rare Parcel Total Rent Per Second: $<span id="rptrps">0.00000000</span></div>
+							<br/>
+							<div>Rare Parcel Rent Per Minute: $<span id="rprpm">0.00000000</span></div>
+							<div>Rare Parcel Boost Rent Per Minute: $<span id="rpbrpm">0.00000000</span></div>
+							<div>Rare Parcel Badge Rent Per Minute: $<span id="rpBrpm">0.00000000</span></div>
+							<div>Rare Parcel Total Rent Per Minute: $<span id="rptrpm">0.00000000</span></div>
+							<br/>
+							<div>Rare Parcel Rent Per Hour: $<span id="rprph">0.00000000</span></div>
+							<div>Rare Parcel Boost Rent Per Hour: $<span id="rpbrph">0.00000000</span></div>
+							<div>Rare Parcel Badge Rent Per Hour: $<span id="rpBrph">0.00000000</span></div>
+							<div>Rare Parcel Total Rent Per Hour: $<span id="rptrph">0.00000000</span></div>
+							<br/>
+							<div>Rare Parcel Rent Per Day: $<span id="rprpd">0.00000000</span></div>
+							<div>Rare Parcel Boost Rent Per Day: $<span id="rpbrpd">0.00000000</span></div>
+							<div>Rare Parcel Badge Rent Per Day: $<span id="rpBrpd">0.00000000</span></div>
+							<div>Rare Parcel Total Rent Per Day: $<span id="rptrpd">0.00000000</span></div>
+							<br/>
+							<div>Rare Parcel Rent Per Week: $<span id="rprpw">0.00000000</span></div>
+							<div>Rare Parcel Boost Rent Per Week: $<span id="rpbrpw">0.00000000</span></div>
+							<div>Rare Parcel Badge Rent Per Week: $<span id="rpBrpw">0.00000000</span></div>
+							<div>Rare Parcel Total Rent Per Week: $<span id="rptrpw">0.00000000</span></div>
+							<br/>
+							<div>Rare Parcel Rent Per Month: $<span id="rprpmo">0.00000000</span></div>
+							<div>Rare Parcel Boost Rent Per Month: $<span id="rpbrpmo">0.00000000</span></div>
+							<div>Rare Parcel Badge Rent Per Month: $<span id="rpBrpmo">0.00000000</span></div>
+							<div>Rare Parcel Total Rent Per Month: $<span id="rptrpmo">0.00000000</span></div>
+							<br/>
+							<div>Rare Parcel Rent Per Year: $<span id="rprpy">0.00000000</span></div>
+							<div>Rare Parcel Boost Rent Per Year: $<span id="rpbrpy">0.00000000</span></div>
+							<div>Rare Parcel Badge Rent Per Year: $<span id="rpBrpy">0.00000000</span></div>
+							<div>Rare Parcel Total Rent Per Year: $<span id="rptrpy">0.00000000</span></div>
+							<br/>
+							<div>Rare Parcels Make Up <span>0%</span> Of Your Rent.</div>
+							<!--
+							Event Boost
+							
+							
+							-->
+						</div>
+					</div>
+					<div id="epicParcelPayout"><h3></h3>
+						<div id="eppContainer" style="display: none;">
+							<div>Epic Parcel Rent Per Second: $<span id="eprps">0.00000000</span></div>
+							<div>Epic Parcel Boost Rent Per Second: $<span id="epbrps">0.00000000</span></div>
+							<div>Epic Parcel Badge Rent Per Second: $<span id="epBrps">0.00000000</span></div>
+							<div>Epic Parcel Total Rent Per Second: $<span id="eptrps">0.00000000</span></div>
+							<br/>
+							<div>Epic Parcel Rent Per Minute: $<span id="eprpm">0.00000000</span></div>
+							<div>Epic Parcel Boost Rent Per Minute: $<span id="epbrpm">0.00000000</span></div>
+							<div>Epic Parcel Badge Rent Per Minute: $<span id="epBrpm">0.00000000</span></div>
+							<div>Epic Parcel Total Rent Per Minute: $<span id="eptrpm">0.00000000</span></div>
+							<br/>
+							<div>Epic Parcel Rent Per Hour: $<span id="eprph">0.00000000</span></div>
+							<div>Epic Parcel Boost Rent Per Hour: $<span id="epbrph">0.00000000</span></div>
+							<div>Epic Parcel Badge Rent Per Hour: $<span id="epBrph">0.00000000</span></div>
+							<div>Epic Parcel Total Rent Per Hour: $<span id="eptrph">0.00000000</span></div>
+							<br/>
+							<div>Epic Parcel Rent Per Day: $<span id="eprpd">0.00000000</span></div>
+							<div>Epic Parcel Boost Rent Per Day: $<span id="epbrpd">0.00000000</span></div>
+							<div>Epic Parcel Badge Rent Per Day: $<span id="epBrpd">0.00000000</span></div>
+							<div>Epic Parcel Total Rent Per Day: $<span id="eptrpd">0.00000000</span></div>
+							<br/>
+							<div>Epic Parcel Rent Per Week: $<span id="eprpw">0.00000000</span></div>
+							<div>Epic Parcel Boost Rent Per Week: $<span id="epbrpw">0.00000000</span></div>
+							<div>Epic Parcel Badge Rent Per Week: $<span id="epBrpw">0.00000000</span></div>
+							<div>Epic Parcel Total Rent Per Week: $<span id="eptrpw">0.00000000</span></div>
+							<br/>
+							<div>Epic Parcel Rent Per Month: $<span id="eprpmo">0.00000000</span></div>
+							<div>Epic Parcel Boost Rent Per Month: $<span id="epbrpmo">0.00000000</span></div>
+							<div>Epic Parcel Badge Rent Per Month: $<span id="epBrpmo">0.00000000</span></div>
+							<div>Epic Parcel Total Rent Per Month: $<span id="eptrpmo">0.00000000</span></div>
+							<br/>
+							<div>Epic Parcel Rent Per Year: $<span id="eprpy">0.00000000</span></div>
+							<div>Epic Parcel Boost Rent Per Year: $<span id="epbrpy">0.00000000</span></div>
+							<div>Epic Parcel Badge Rent Per Year: $<span id="epBrpy">0.00000000</span></div>
+							<div>Epic Parcel Total Rent Per Year: $<span id="eptrpy">0.00000000</span></div>
+							<br/>
+							<div>Epic Parcels Make Up <span>0%</span> Of Your Rent.</div>
+							<!--
+							Event Boost
+							
+							
+							-->
+						</div>
+					</div>
+					<div id="legendaryParcelPayout"><h3></h3>
+						<div id="lppContainer" style="display: none;">
+							<div>Legendary Parcel Rent Per Second: $<span id="lprps">0.00000000</span></div>
+							<div>Legendary Parcel Boost Rent Per Second: $<span id="lpbrps">0.00000000</span></div>
+							<div>Legendary Parcel Badge Rent Per Second: $<span id="lpBrps">0.00000000</span></div>
+							<div>Legendary Parcel Total Rent Per Second: $<span id="lptrps">0.00000000</span></div>
+							<br/>
+							<div>Legendary Parcel Rent Per Minute: $<span id="lprpm">0.00000000</span></div>
+							<div>Legendary Parcel Boost Rent Per Minute: $<span id="lpbrpm">0.00000000</span></div>
+							<div>Legendary Parcel Badge Rent Per Minute: $<span id="lpBrpm">0.00000000</span></div>
+							<div>Legendary Parcel Total Rent Per Minute: $<span id="lptrpm">0.00000000</span></div>
+							<br/>
+							<div>Legendary Parcel Rent Per Hour: $<span id="lprph">0.00000000</span></div>
+							<div>Legendary Parcel Boost Rent Per Hour: $<span id="lpbrph">0.00000000</span></div>
+							<div>Legendary Parcel Badge Rent Per Hour: $<span id="lpBrph">0.00000000</span></div>
+							<div>Legendary Parcel Total Rent Per Hour: $<span id="lptrph">0.00000000</span></div>
+							<br/>
+							<div>Legendary Parcel Rent Per Day: $<span id="lprpd">0.00000000</span></div>
+							<div>Legendary Parcel Boost Rent Per Day: $<span id="lpbrpd">0.00000000</span></div>
+							<div>Legendary Parcel Badge Rent Per Day: $<span id="lpBrpd">0.00000000</span></div>
+							<div>Legendary Parcel Total Rent Per Day: $<span id="lptrpd">0.00000000</span></div>
+							<br/>
+							<div>Legendary Parcel Rent Per Week: $<span id="lprpw">0.00000000</span></div>
+							<div>Legendary Parcel Boost Rent Per Week: $<span id="lpbrpw">0.00000000</span></div>
+							<div>Legendary Parcel Badge Rent Per Week: $<span id="lpBrpw">0.00000000</span></div>
+							<div>Legendary Parcel Total Rent Per Week: $<span id="lptrpw">0.00000000</span></div>
+							<br/>
+							<div>Legendary Parcel Rent Per Month: $<span id="lprpmo">0.00000000</span></div>
+							<div>Legendary Parcel Boost Rent Per Month: $<span id="lpbrpmo">0.00000000</span></div>
+							<div>Legendary Parcel Badge Rent Per Month: $<span id="lpBrpmo">0.00000000</span></div>
+							<div>Legendary Parcel Total Rent Per Month: $<span id="lptrpmo">0.00000000</span></div>
+							<br/>
+							<div>Legendary Parcel Rent Per Year: $<span id="lprpy">0.00000000</span></div>
+							<div>Legendary Parcel Boost Rent Per Year: $<span id="lpbrpy">0.00000000</span></div>
+							<div>Legendary Parcel Badge Rent Per Year: $<span id="lpBrpy">0.00000000</span></div>
+							<div>Legendary Parcel Total Rent Per Year: $<span id="lptrpy">0.00000000</span></div>
+							<br/>
+							<div>Legendary Parcels Make Up <span>0%</span> Of Your Rent.</div>
+							<!--
+							Event Boost
+							
+							
+							-->
 						</div>
 					</div>
 					
@@ -246,6 +437,36 @@
 						document.getElementById('cppContainer').style = "display: initial;";
 					}
 				};
+				let rppo = false;
+				document.getElementById('rareParcelPayout').onclick = () => {
+					if (rppo) {
+						rppo = false;
+						document.getElementById('rppContainer').style = "display: none;";
+					} else {
+						rppo = true;
+						document.getElementById('rppContainer').style = "display: initial;";
+					}
+				};
+				let eppo = false;
+				document.getElementById('rareParcelPayout').onclick = () => {
+					if (eppo) {
+						eppo = false;
+						document.getElementById('eppContainer').style = "display: none;";
+					} else {
+						eppo = true;
+						document.getElementById('eppContainer').style = "display: initial;";
+					}
+				};
+				let lppo = false;
+				document.getElementById('legendaryParcelPayout').onclick = () => {
+					if (lppo) {
+						lppo = false;
+						document.getElementById('lppContainer').style = "display: none;";
+					} else {
+						lppo = true;
+						document.getElementById('lppContainer').style = "display: initial;";
+					}
+				};
 				document.getElementsByClassName('info')[0].onclick = () => {
 					let a = document.getElementsByClassName('info')[0].onclick;
 					document.getElementsByClassName('info')[0].onclick = () => {
@@ -298,6 +519,151 @@
 				document.getElementById('epmW').innerHTML = o.payPerMonth.totalWBoost;
 				document.getElementById('epy').innerHTML = o.payPerYear.totalNoBoost;
 				document.getElementById('epyW').innerHTML = o.payPerYear.totalWBoost;
+				
+				document.getElementById('cprps').innerHTML = o.payPerSecond.commonNoBoost;
+				document.getElementById('cpBrps').innerHTML = o.payPerSecond.commonJustBadge;
+				document.getElementById('cpbrps').innerHTML = o.payPerSecond.commonJustBoost;
+				document.getElementById('cptrps').innerHTML = o.payPerSecond.commonWBoost;
+				
+				document.getElementById('cprpm').innerHTML = o.payPerMinute.commonNoBoost;
+				document.getElementById('cpBrpm').innerHTML = o.payPerMinute.commonJustBadge;
+				document.getElementById('cpbrpm').innerHTML = o.payPerMinute.commonJustBoost;
+				document.getElementById('cptrpm').innerHTML = o.payPerMinute.commonWBoost;
+				
+				document.getElementById('cprph').innerHTML = o.payPerHour.commonNoBoost;
+				document.getElementById('cpBrph').innerHTML = o.payPerHour.commonJustBadge;
+				document.getElementById('cpbrph').innerHTML = o.payPerHour.commonJustBoost;
+				document.getElementById('cptrph').innerHTML = o.payPerHour.commonWBoost;
+				
+				document.getElementById('cprpd').innerHTML = o.payPerDay.commonNoBoost;
+				document.getElementById('cpBrpd').innerHTML = o.payPerDay.commonJustBadge;
+				document.getElementById('cpbrpd').innerHTML = o.payPerDay.commonJustBoost;
+				document.getElementById('cptrpd').innerHTML = o.payPerDay.commonWBoost;
+				
+				document.getElementById('cprpw').innerHTML = o.payPerWeek.commonNoBoost;
+				document.getElementById('cpBrpw').innerHTML = o.payPerWeek.commonJustBadge;
+				document.getElementById('cpbrpw').innerHTML = o.payPerWeek.commonJustBoost;
+				document.getElementById('cptrpw').innerHTML = o.payPerWeek.commonWBoost;
+				
+				document.getElementById('cprpmo').innerHTML = o.payPerMonth.commonNoBoost;
+				document.getElementById('cpBrpmo').innerHTML = o.payPerMonth.commonJustBadge;
+				document.getElementById('cpbrpmo').innerHTML = o.payPerMonth.commonJustBoost;
+				document.getElementById('cptrpmo').innerHTML = o.payPerMonth.commonWBoost;
+				
+				document.getElementById('cprpy').innerHTML = o.payPerYear.commonNoBoost;
+				document.getElementById('cpBrpy').innerHTML = o.payPerYear.commonJustBadge;
+				document.getElementById('cpbrpy').innerHTML = o.payPerYear.commonJustBoost;
+				document.getElementById('cptrpy').innerHTML = o.payPerYear.commonWBoost;
+				//
+				
+				document.getElementById('eprps').innerHTML = o.payPerSecond.epicNoBoost;
+				document.getElementById('epBrps').innerHTML = o.payPerSecond.epicJustBadge;
+				document.getElementById('epbrps').innerHTML = o.payPerSecond.epicJustBoost;
+				document.getElementById('eptrps').innerHTML = o.payPerSecond.epicWBoost;
+				
+				document.getElementById('eprpm').innerHTML = o.payPerMinute.epicNoBoost;
+				document.getElementById('epBrpm').innerHTML = o.payPerMinute.epicJustBadge;
+				document.getElementById('epbrpm').innerHTML = o.payPerMinute.epicJustBoost;
+				document.getElementById('eptrpm').innerHTML = o.payPerMinute.epicWBoost;
+				
+				document.getElementById('eprph').innerHTML = o.payPerHour.epicNoBoost;
+				document.getElementById('epBrph').innerHTML = o.payPerHour.epicJustBadge;
+				document.getElementById('epbrph').innerHTML = o.payPerHour.epicJustBoost;
+				document.getElementById('eptrph').innerHTML = o.payPerHour.epicWBoost;
+				
+				document.getElementById('eprpd').innerHTML = o.payPerDay.epicNoBoost;
+				document.getElementById('epBrpd').innerHTML = o.payPerDay.epicJustBadge;
+				document.getElementById('epbrpd').innerHTML = o.payPerDay.epicJustBoost;
+				document.getElementById('eptrpd').innerHTML = o.payPerDay.epicWBoost;
+				
+				document.getElementById('eprpw').innerHTML = o.payPerWeek.epicNoBoost;
+				document.getElementById('epBrpw').innerHTML = o.payPerWeek.epicJustBadge;
+				document.getElementById('epbrpw').innerHTML = o.payPerWeek.epicJustBoost;
+				document.getElementById('eptrpw').innerHTML = o.payPerWeek.epicWBoost;
+				
+				document.getElementById('eprpmo').innerHTML = o.payPerMonth.epicNoBoost;
+				document.getElementById('epBrpmo').innerHTML = o.payPerMonth.epicJustBadge;
+				document.getElementById('epbrpmo').innerHTML = o.payPerMonth.epicJustBoost;
+				document.getElementById('eptrpmo').innerHTML = o.payPerMonth.epicWBoost;
+				
+				document.getElementById('eprpy').innerHTML = o.payPerYear.epicNoBoost;
+				document.getElementById('epBrpy').innerHTML = o.payPerYear.epicJustBadge;
+				document.getElementById('epbrpy').innerHTML = o.payPerYear.epicJustBoost;
+				document.getElementById('eptrpy').innerHTML = o.payPerYear.epicWBoost;
+				
+				//
+				
+				document.getElementById('rprps').innerHTML = o.payPerSecond.rareNoBoost;
+				document.getElementById('rpBrps').innerHTML = o.payPerSecond.rareJustBadge;
+				document.getElementById('rpbrps').innerHTML = o.payPerSecond.rareJustBoost;
+				document.getElementById('rptrps').innerHTML = o.payPerSecond.rareWBoost;
+				
+				document.getElementById('rprpm').innerHTML = o.payPerMinute.rareNoBoost;
+				document.getElementById('rpBrpm').innerHTML = o.payPerMinute.rareJustBadge;
+				document.getElementById('rpbrpm').innerHTML = o.payPerMinute.rareJustBoost;
+				document.getElementById('rptrpm').innerHTML = o.payPerMinute.rareWBoost;
+				
+				document.getElementById('rprph').innerHTML = o.payPerHour.rareNoBoost;
+				document.getElementById('rpBrph').innerHTML = o.payPerHour.rareJustBadge;
+				document.getElementById('rpbrph').innerHTML = o.payPerHour.rareJustBoost;
+				document.getElementById('rptrph').innerHTML = o.payPerHour.rareWBoost;
+				
+				document.getElementById('rprpd').innerHTML = o.payPerDay.rareNoBoost;
+				document.getElementById('rpBrpd').innerHTML = o.payPerDay.rareJustBadge;
+				document.getElementById('rpbrpd').innerHTML = o.payPerDay.rareJustBoost;
+				document.getElementById('rptrpd').innerHTML = o.payPerDay.rareWBoost;
+				
+				document.getElementById('rprpw').innerHTML = o.payPerWeek.rareNoBoost;
+				document.getElementById('rpBrpw').innerHTML = o.payPerWeek.rareJustBadge;
+				document.getElementById('rpbrpw').innerHTML = o.payPerWeek.rareJustBoost;
+				document.getElementById('rptrpw').innerHTML = o.payPerWeek.rareWBoost;
+				
+				document.getElementById('rprpmo').innerHTML = o.payPerMonth.rareNoBoost;
+				document.getElementById('rpBrpmo').innerHTML = o.payPerMonth.rareJustBadge;
+				document.getElementById('rpbrpmo').innerHTML = o.payPerMonth.rareJustBoost;
+				document.getElementById('rptrpmo').innerHTML = o.payPerMonth.rareWBoost;
+				
+				document.getElementById('rprpy').innerHTML = o.payPerYear.rareNoBoost;
+				document.getElementById('rpBrpy').innerHTML = o.payPerYear.rareJustBadge;
+				document.getElementById('rpbrpy').innerHTML = o.payPerYear.rareJustBoost;
+				document.getElementById('rptrpy').innerHTML = o.payPerYear.rareWBoost;
+				//
+				
+				document.getElementById('lprps').innerHTML = o.payPerSecond.legendaryNoBoost;
+				document.getElementById('lpBrps').innerHTML = o.payPerSecond.legendaryJustBadge;
+				document.getElementById('lpbrps').innerHTML = o.payPerSecond.legendaryJustBoost;
+				document.getElementById('lptrps').innerHTML = o.payPerSecond.legendaryWBoost;
+				
+				document.getElementById('lprpm').innerHTML = o.payPerMinute.legendaryNoBoost;
+				document.getElementById('lpBrpm').innerHTML = o.payPerMinute.legendaryJustBadge;
+				document.getElementById('lpbrpm').innerHTML = o.payPerMinute.legendaryJustBoost;
+				document.getElementById('lptrpm').innerHTML = o.payPerMinute.legendaryWBoost;
+				
+				document.getElementById('lprph').innerHTML = o.payPerHour.legendaryNoBoost;
+				document.getElementById('lpBrph').innerHTML = o.payPerHour.legendaryJustBadge;
+				document.getElementById('lpbrph').innerHTML = o.payPerHour.legendaryJustBoost;
+				document.getElementById('lptrph').innerHTML = o.payPerHour.legendaryWBoost;
+				
+				document.getElementById('lprpd').innerHTML = o.payPerDay.legendaryNoBoost;
+				document.getElementById('lpBrpd').innerHTML = o.payPerDay.legendaryJustBadge;
+				document.getElementById('lpbrpd').innerHTML = o.payPerDay.legendaryJustBoost;
+				document.getElementById('lptrpd').innerHTML = o.payPerDay.legendaryWBoost;
+				
+				document.getElementById('lprpw').innerHTML = o.payPerWeek.legendaryNoBoost;
+				document.getElementById('lpBrpw').innerHTML = o.payPerWeek.legendaryJustBadge;
+				document.getElementById('lpbrpw').innerHTML = o.payPerWeek.legendaryJustBoost;
+				document.getElementById('lptrpw').innerHTML = o.payPerWeek.legendaryWBoost;
+				
+				document.getElementById('lprpmo').innerHTML = o.payPerMonth.legendaryNoBoost;
+				document.getElementById('lpBrpmo').innerHTML = o.payPerMonth.legendaryJustBadge;
+				document.getElementById('lpbrpmo').innerHTML = o.payPerMonth.legendaryJustBoost;
+				document.getElementById('lptrpmo').innerHTML = o.payPerMonth.legendaryWBoost;
+				
+				document.getElementById('lprpy').innerHTML = o.payPerYear.legendaryNoBoost;
+				document.getElementById('lpBrpy').innerHTML = o.payPerYear.legendaryJustBadge;
+				document.getElementById('lpbrpy').innerHTML = o.payPerYear.legendaryJustBoost;
+				document.getElementById('lptrpy').innerHTML = o.payPerYear.legendaryWBoost;
+				
 				app.funcs.save();
 			},
 			calculate: () => {
@@ -396,6 +762,16 @@
 					bLegendaryEarnings = legendaryEarnings;
 				}
 				output.payPerSecond = {};
+				output.payPerSecond.commonJustBadge = ((cp * cpay) * (bb-1)).toFixed(10);
+				output.payPerSecond.rareJustBadge = ((rp * rpay) * (bb-1)).toFixed(10);
+				output.payPerSecond.epicJustBadge = ((ep * epay) * (bb-1)).toFixed(10);
+				output.payPerSecond.legendaryJustBadge = ((lp * lpay) * (bb-1)).toFixed(10);
+				
+				output.payPerSecond.commonJustBoost = ((allowedBoost * cp * cpay) - (cp * cpay)).toFixed(10);
+				output.payPerSecond.rareJustBoost = ((allowedBoost * rp * rpay) - (rp * rpay)).toFixed(10);
+				output.payPerSecond.epicJustBoost = ((allowedBoost * ep * epay) - (ep * epay)).toFixed(10);
+				output.payPerSecond.legendaryJustBoost = ((allowedBoost * lp * lpay) - (lp * lpay)).toFixed(10);
+				
 				output.payPerSecond.commonNoBoost = commonEarnings.toFixed(10);
 				output.payPerSecond.rareNoBoost = rareEarnings.toFixed(10);
 				output.payPerSecond.epicNoBoost = epicEarnings.toFixed(10);
@@ -407,6 +783,7 @@
 				output.payPerSecond.epicWBoost = bEpicEarnings.toFixed(10);
 				output.payPerSecond.legendaryWBoost = bLegendaryEarnings.toFixed(10);
 				output.payPerSecond.totalWBoost = (bCommonEarnings + bRareEarnings + bEpicEarnings + bLegendaryEarnings).toFixed(10);
+				
 				
 				output.payPerMinute = {};
 				for (let i = 0; i < Object.keys(output.payPerSecond).length; i++) {
@@ -433,9 +810,9 @@
 				}
 				
 				output.payPerMonth = {};
-				for (let i = 0; i < Object.keys(output.payPerWeek).length; i++) {
-					let a = output.payPerWeek[Object.keys(output.payPerWeek)[i]];
-					output.payPerMonth[Object.keys(output.payPerWeek)[i]] = (Number(a) * 30).toFixed(10);
+				for (let i = 0; i < Object.keys(output.payPerDay).length; i++) {
+					let a = output.payPerDay[Object.keys(output.payPerDay)[i]];
+					output.payPerMonth[Object.keys(output.payPerDay)[i]] = (Number(a) * 30).toFixed(10);
 				}
 				
 				output.payPerYear = {};
